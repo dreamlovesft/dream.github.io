@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/dreamlovesft/Markdown-Photos/master/1.png">
 <meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/2.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/60d490dea4fafce0.png">
-<meta property="og:updated_time" content="2018-11-01T10:32:44.656Z">
+<meta property="og:updated_time" content="2018-11-01T10:45:46.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World">
 <meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
@@ -370,14 +370,14 @@ from sklearn.svm import SVC
 </code></pre><p>所有类型的库的输入都不应有错误。如果出错，请暂时停下来配置一个完整的Scipy环境。</p>
 <h3 id="导入数据集"><a href="#导入数据集" class="headerlink" title="导入数据集"></a>导入数据集</h3><p>&#160; &#160; &#160; &#160;我们可以在UCI机器学习仓库下载<a href="http://archive.ics.uci.edu/ml/datasets/Iris" target="_blank" rel="noopener">莺尾花（Irirs Flower）数据集</a>，下载完成后保存在项目的统计目录下或通过链接访问数据。在这里用Pandas来导入数据和对数据进行描述性统计分析，并利用Matplotlib实现数据的可视化。需要注意的是在导入数据时，为每一个数据特征设定了名称，这有助于后面对数据工作的展开，尤其是通过图表展示数据，代码如下：</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url =&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data&quot;</span><br><span class="line">names =[&apos;sepal-length&apos;, &apos;sepal-width&apos;,&apos;petal-length&apos;, &apos;petal-width&apos;,&apos;class&apos;]</span><br><span class="line">dataset = read_csv(url, names=names)</span><br></pre></td></tr></table></figure>
-<h2 id="1-3-概述数据"><a href="#1-3-概述数据" class="headerlink" title="1.3 概述数据"></a>1.3 概述数据</h2><p>&#160; &#160; &#160; &#160; 我们需要先看一下数据，增加对数据的了解，以便选择合适的算法。我们将从以下几个方面来审查数据：</p>
+<h2 id="概述数据"><a href="#概述数据" class="headerlink" title="概述数据"></a>概述数据</h2><p>&#160; &#160; &#160; &#160; 我们需要先看一下数据，增加对数据的了解，以便选择合适的算法。我们将从以下几个方面来审查数据：</p>
 <p>（1）数据的维度。<br>（2）查看数据自身。<br>（3）统计描述所有的数据特征。<br>（4）数据分类的分布情况。</p>
 <p>&#160; &#160; &#160; &#160;不必怛心这会敲很多代码，其实每一种审查方法只有一行代码，这些代码在以后的许多项目中也会用到。</p>
-<h3 id="1-3-1-数据维度"><a href="#1-3-1-数据维度" class="headerlink" title="1.3.1 数据维度"></a>1.3.1 数据维度</h3><p>&#160; &#160; &#160; &#160; 通过审查数据维度，可以对数据集有一个大概的了解，如看一下数据有多少行，多少列。代码如下：</p>
+<h3 id="数据维度"><a href="#数据维度" class="headerlink" title="数据维度"></a>数据维度</h3><p>&#160; &#160; &#160; &#160; 通过审查数据维度，可以对数据集有一个大概的了解，如看一下数据有多少行，多少列。代码如下：</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&apos;数据维度： 行：%s, 列: %s&apos; % dataset.shape)</span><br></pre></td></tr></table></figure>
 <p>将会得到如下执行结果：</p>
 <p><code>数据维度： 行：150, 列: 5</code></p>
-<h3 id="1-3-2-查看数据自身"><a href="#1-3-2-查看数据自身" class="headerlink" title="1.3.2 查看数据自身"></a>1.3.2 查看数据自身</h3><p>&#160; &#160; &#160; &#160; 查看数据自身能让我们很好地理解数据，让我们直观的看到数据的特征、类型，以及数据大概分布的范围。代码如下：</p>
+<h3 id="查看数据自身"><a href="#查看数据自身" class="headerlink" title="查看数据自身"></a>查看数据自身</h3><p>&#160; &#160; &#160; &#160; 查看数据自身能让我们很好地理解数据，让我们直观的看到数据的特征、类型，以及数据大概分布的范围。代码如下：</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print (dataset.head(10))</span><br></pre></td></tr></table></figure>
 <p> 在这里查看前十行的记录，将会得到如下执行结果：</p>
 <pre><code>    sepal-length  sepal-width     ...       petal-width        class
@@ -391,7 +391,7 @@ from sklearn.svm import SVC
 7           5.0          3.4     ...               0.2  Iris-setosa
 8           4.4          2.9     ...               0.2  Iris-setosa
 9           4.9          3.1     ...               0.1  Iris-setosa
-</code></pre><h3 id="1-3-3-统计数据的描述"><a href="#1-3-3-统计数据的描述" class="headerlink" title="1.3.3 统计数据的描述"></a>1.3.3 统计数据的描述</h3><p>&#160; &#160; &#160; &#160; 接下来看一下数据在不同分类的分布情况，执行程序后得到的是每个分类数据量的绝对值的数值，查看各类数据的分布是否均衡。</p>
+</code></pre><h3 id="统计数据的描述"><a href="#统计数据的描述" class="headerlink" title="统计数据的描述"></a>统计数据的描述</h3><p>&#160; &#160; &#160; &#160; 接下来看一下数据在不同分类的分布情况，执行程序后得到的是每个分类数据量的绝对值的数值，查看各类数据的分布是否均衡。</p>
 <pre><code>#分类分布情况
 print (dataset.groupby(&apos;class&apos;).size())
 </code></pre><p> 这里就是通过前面设定的数据特征名称来查看数据的，执行结果如下：</p>
@@ -477,10 +477,6 @@ pyplot.show()
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/01/Untitled Document/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
       
@@ -560,7 +556,7 @@ pyplot.show()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -625,7 +621,7 @@ pyplot.show()
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-概述数据"><span class="nav-number">3.</span> <span class="nav-text">1.3 概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">1.3.1 数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">1.3.2 查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">1.3.3 统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估算法"><span class="nav-number">5.</span> <span class="nav-text">评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">分离出评估数据集</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述数据"><span class="nav-number">3.</span> <span class="nav-text">概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估算法"><span class="nav-number">5.</span> <span class="nav-text">评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">分离出评估数据集</span></a></li></ol></li></ol></div>
             
 
           </div>
