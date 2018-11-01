@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Dreamelover">
 <meta property="og:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-01T07:06:54.116Z">
+<meta property="og:updated_time" content="2018-11-01T07:09:19.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World项目">
 <meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
@@ -345,23 +345,8 @@
       
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>&#160; &#160; &#160; &#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：<br><a id="more"></a><br>&#160; &#160; &#160; &#160;<br> （1）导入数据。<br> （2）概述数据。<br> （3）数据可视化。<br> （4）评估算法。<br> （5）实施预测。<br>&#160; &#160; &#160; &#160; </p>
 <h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><h3 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h3><p>&#160; &#160; &#160; &#160; 导入在项目中要使用的数据使用的类库和方法，代码如下：</p>
-<pre><code>from pandas import read_csv
-from pandas.plotting import scatter_matrix
-from matplotlib import pyplot
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-</code></pre><h2 id="1-3-概述数据"><a href="#1-3-概述数据" class="headerlink" title="1.3 概述数据"></a>1.3 概述数据</h2><p>&#160; &#160; &#160; &#160; 我们需要先看一下数据，增加对数据的了解，以便选择合适的算法。我们将从以下几个方面来审查数据：</p>
-<p>（1）数据的维度。<br>（2）查看数据自身。<br>（3）统计描述所有的数据特征。<br>（4）数据分类的分布情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">from pandas import read_csv</span><br><span class="line">from pandas.plotting import scatter_matrix</span><br><span class="line">from matplotlib import pyplot</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.model_selection import KFold</span><br><span class="line">from sklearn.model_selection import cross_val_score</span><br><span class="line">from sklearn.metrics import classification_report</span><br><span class="line">from sklearn.metrics import confusion_matrix</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line">from sklearn.linear_model import LogisticRegression</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line">from sklearn.discriminant_analysis import LinearDiscriminantAnalysis</span><br><span class="line">from sklearn.neighbors import KNeighborsClassifier</span><br><span class="line">from sklearn.naive_bayes import GaussianNB</span><br><span class="line">from sklearn.svm import SVC</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 1.3 概述数据</span><br><span class="line">&amp;#160; &amp;#160; &amp;#160; &amp;#160; 我们需要先看一下数据，增加对数据的了解，以便选择合适的算法。我们将从以下几个方面来审查数据：</span><br><span class="line"></span><br><span class="line">（1）数据的维度。</span><br><span class="line">（2）查看数据自身。</span><br><span class="line">（3）统计描述所有的数据特征。</span><br><span class="line">（4）数据分类的分布情况。</span><br><span class="line"></span><br><span class="line">&amp;#160; &amp;#160; &amp;#160; &amp;#160;不必怛心这会敲很多代码，其实每一种审查方法只有一行代码，这些代码在以后的许多项目中也会用到。</span><br><span class="line">### 1.3.1 数据维度</span><br><span class="line">&amp;#160; &amp;#160; &amp;#160; &amp;#160; 通过审查数据维度，可以对数据集有一个大概的了解，如看一下数据有多少行，多少列。代码如下：</span><br></pre></td></tr></table></figure>
+<p> #显示数据维度<br>print(‘数据维度： 行：%s, 列: %s’ % dataset.shape)<br><code>`</code></p>
 
       
     </div>
@@ -560,7 +545,7 @@ from sklearn.svm import SVC
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-概述数据"><span class="nav-number">3.</span> <span class="nav-text">1.3 概述数据</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li></ol></li></ol></div>
             
 
           </div>
