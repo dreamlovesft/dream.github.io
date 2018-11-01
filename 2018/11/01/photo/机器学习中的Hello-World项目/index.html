@@ -83,14 +83,14 @@
 <meta name="keywords" content="python,莺尾花">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习中的Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/11/01/photo/2/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/photo/机器学习中的Hello-World项目/index.html">
 <meta property="og:site_name" content="Dreamelover">
 <meta property="og:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/1.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/c4a08c0bbef2e750.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/60d490dea4fafce0.png">
-<meta property="og:updated_time" content="2018-11-01T14:03:06.055Z">
+<meta property="og:updated_time" content="2018-11-01T14:36:37.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World">
 <meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/01/photo/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/photo/机器学习中的Hello-World项目/"/>
 
 
 
@@ -258,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/photo/2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/photo/机器学习中的Hello-World项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -423,7 +423,39 @@ pyplot.show()
 <h3 id="分离出评估数据集"><a href="#分离出评估数据集" class="headerlink" title="分离出评估数据集"></a>分离出评估数据集</h3><p>&#160; &#160; &#160; &#160; 模型创建以后需要知道创建的模型是否足够好，在选择算法的过程中会采用统计方法来评估算法模型，但是我们更想知道，算法模型对真实数据的准确度如何？这就是保留一部分数据来评估算法模型的主要原因下面将按照80%的训练数据集20%的评估数据集来分离数据。代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#分离数据集</span><br><span class="line">array = dataset.values</span><br><span class="line">X = array[:, 0:4]</span><br><span class="line">Y = array[:, 4]</span><br><span class="line">validation_size = 0.2</span><br><span class="line">seed = 7</span><br><span class="line">X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=validation_size, random_state=seed)</span><br></pre></td></tr></table></figure>
 <p>&#160; &#160; &#160; &#160; 现在分离出了X_train和Y_train用来训练算法创建模型，X_validation和Y_validation用来验证评估模型。</p>
-
+<h3 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h3><p>&#160; &#160; &#160; &#160; 这里采用十折交叉验证来奋力训练数据集，并评估算法模型的准确性。十折交叉验证是随机将数据分成十份：九份用来训练模型，一份用来评估算法。后面我们将使用相同的数据对每一种算法进行训练和评估，并从中选择最好的模型。</p>
+<h3 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h3><p>对任何问题来说，不能仅通过对数据进行审查旧版的哪个算法最有效。通过前面的图表发现有些数据符合线性分布，故评估下面六种不同算法：</p>
+<ul>
+<li>线性回归（LR）</li>
+<li>线性判别分析（LDA）</li>
+<li>K近邻（KNN）</li>
+<li>分类与回归树（CART）</li>
+<li>贝叶斯分类器（NB）</li>
+<li>支持向量机（SVM）</li>
+</ul>
+<p>&#160; &#160; &#160; &#160; 在每次对算法的评估前都会重置随机数的种子，以确保每次对算法评估都使用相同的数据集，接下来就创建并评估六种算法模型。代码如下:</p>
+<pre><code>#算法审查
+models = {}
+models[&apos;LR&apos;] = LogisticRegression()
+models[&apos;LDA&apos;] = LinearDiscriminantAnalysis()
+models[&apos;KNN&apos;] = KNeighborsClassifier()
+models[&apos;CART&apos;] = DecisionTreeClassifier()
+models[&apos;NB&apos;] = GaussianNB()
+models[&apos;SVM&apos;] = SVC()
+#评估算法
+results = []
+for key in models:
+  kfold = model_selection.KFold(n_splits=10, random_state=seed)
+  cv_reults = model_selection.cross_val_score(models[key], X_train, Y_train, cv=kfold, scoring=&apos;accuracy&apos; )
+  results.append(cv_reults)
+  print(&apos;%s: %f (%f)&apos; %(key, cv_reults.mean(), cv_reults.std()))
+</code></pre><p>执行结果如下：</p>
+<pre><code>LR: 0.966667 (0.040825)
+LDA: 0.975000 (0.038188)
+KNN: 0.983333 (0.033333)
+CART: 0.983333 (0.033333)
+NB: 0.975000 (0.053359)
+</code></pre>
       
     </div>
     
@@ -467,8 +499,8 @@ pyplot.show()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/31/机器学习中的Hello-World项目/" rel="next" title="机器学习中的Hello World项目">
-                <i class="fa fa-chevron-left"></i> 机器学习中的Hello World项目
+              <a href="/2018/10/20/test/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
               </a>
             
           </div>
@@ -556,7 +588,7 @@ pyplot.show()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -621,7 +653,7 @@ pyplot.show()
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述数据"><span class="nav-number">3.</span> <span class="nav-text">概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估算法"><span class="nav-number">5.</span> <span class="nav-text">评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">分离出评估数据集</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述数据"><span class="nav-number">3.</span> <span class="nav-text">概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估算法"><span class="nav-number">5.</span> <span class="nav-text">评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">分离出评估数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评估模型"><span class="nav-number">5.2.</span> <span class="nav-text">评估模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建模型"><span class="nav-number">5.3.</span> <span class="nav-text">创建模型</span></a></li></ol></li></ol></div>
             
 
           </div>
