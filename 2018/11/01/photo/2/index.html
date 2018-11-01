@@ -88,7 +88,9 @@
 <meta property="og:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreamlovesft/Markdown-Photos/master/1.png">
-<meta property="og:updated_time" content="2018-11-01T09:42:23.226Z">
+<meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/2.png">
+<meta property="og:image" content="http://i2.bvimg.com/663692/60d490dea4fafce0.png">
+<meta property="og:updated_time" content="2018-11-01T10:28:38.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World">
 <meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
@@ -410,6 +412,17 @@ print (dataset.groupby(&apos;class&apos;).size())
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataset.plot(kind=&apos;box&apos;, subplots=True, layout=(2,2), sharex=False, sharey=False)</span><br><span class="line">pyplot.show()</span><br></pre></td></tr></table></figure>
 <p>执行结果如下图:</p>
 <p><img src="https://raw.githubusercontent.com/dreamlovesft/Markdown-Photos/master/1.png" alt="Markdown"></p>
+<p>&#160; &#160; &#160; &#160; 还可以通过直方图来显示每个特征属性的分布情况。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataset.hist()</span><br><span class="line">pyplot.show()</span><br></pre></td></tr></table></figure></p>
+<p>在输出的图表中，我们可以看到separ-length和separ-width符合高斯分布。执行结果如下图：<br><img src="https://github.com/dreamlovesft/Markdown-Photos/raw/master/2.png" alt="Markdown"></p>
+<h3 id="1-4-2-多变量图表"><a href="#1-4-2-多变量图表" class="headerlink" title="1.4.2 多变量图表"></a>1.4.2 多变量图表</h3><p>通过多变量图表可知不同特征属性之间的关系。我们通过散点矩阵图来查看每个属性之间的影响关系。</p>
+<pre><code>#多变量图表&amp;散点矩阵图
+scatter_matrix(dataset)
+pyplot.show()
+</code></pre><p>执行结果如下：<br><img src="http://i2.bvimg.com/663692/60d490dea4fafce0.png" alt="Markdown"></p>
+<h2 id="1-5-评估算法"><a href="#1-5-评估算法" class="headerlink" title="1.5 评估算法"></a>1.5 评估算法</h2><p>创建不同的算法模型，评估他们的准确度，进而找到最合适的算法。步骤如下：<br>（1）分离出评估数集。<br>（2）采用十折交叉法评估算法模型。<br>（3）生成六个不同模型来检测新数据。<br>（4）选择最优模型。</p>
+<h3 id="1-5-1-分离出评估数据集"><a href="#1-5-1-分离出评估数据集" class="headerlink" title="1.5.1 分离出评估数据集"></a>1.5.1 分离出评估数据集</h3><p>&#160; &#160; &#160; &#160; 模型创建以后需要知道创建的模型是否足够好，在选择算法的过程中会采用统计方法来评估算法模型，但是我们更想知道，算法模型对真实数据的准确度如何？这就是保留一部分数据来评估算法模型的主要原因下面将按照80%的训练数据集20%的评估数据集来分离数据。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#分离数据集</span><br><span class="line">array = dataset.values</span><br><span class="line">X = array[:, 0:4]</span><br><span class="line">Y = array[:, 4]</span><br><span class="line">validation_size = 0.2</span><br><span class="line">seed = 7</span><br><span class="line">X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=validation_size, random_state=seed)</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160; 现在分离出了X_train和Y_train用来训练算法创建模型，X_validation和Y_validation用来验证评估模型。</p>
 
       
     </div>
@@ -608,7 +621,7 @@ print (dataset.groupby(&apos;class&apos;).size())
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-概述数据"><span class="nav-number">3.</span> <span class="nav-text">1.3 概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">1.3.1 数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">1.3.2 查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">1.3.3 统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-概述数据"><span class="nav-number">3.</span> <span class="nav-text">1.3 概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">1.3.1 数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">1.3.2 查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">1.3.3 统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">1.4.2 多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-评估算法"><span class="nav-number">5.</span> <span class="nav-text">1.5 评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">1.5.1 分离出评估数据集</span></a></li></ol></li></ol></div>
             
 
           </div>
