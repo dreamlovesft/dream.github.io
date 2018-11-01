@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="第一个机器学习项目刚刚接触机器学习，按照参考魏贞原老师的教材，编写了我的第一个机器学习项目即">
+<meta name="description" content="第一个机器学习项目============================写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160;                   刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：&amp;#">
 <meta name="keywords" content="python,莺尾花">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习中的Hello World项目">
 <meta property="og:url" content="http://yoursite.com/2018/10/31/机器学习中的Hello-World项目/index.html">
 <meta property="og:site_name" content="Dreamelover">
-<meta property="og:description" content="第一个机器学习项目刚刚接触机器学习，按照参考魏贞原老师的教材，编写了我的第一个机器学习项目即">
+<meta property="og:description" content="第一个机器学习项目============================写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160;                   刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：&amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-31T14:29:26.113Z">
+<meta property="og:updated_time" content="2018-11-01T04:48:48.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World项目">
-<meta name="twitter:description" content="第一个机器学习项目刚刚接触机器学习，按照参考魏贞原老师的教材，编写了我的第一个机器学习项目即">
+<meta name="twitter:description" content="第一个机器学习项目============================写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160;                   刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：&amp;#">
 
 
 
@@ -343,8 +343,25 @@
       
 
       
-        <h1 id="第一个机器学习项目"><a href="#第一个机器学习项目" class="headerlink" title="第一个机器学习项目"></a>第一个机器学习项目</h1><pre><code>刚刚接触机器学习，按照参考魏贞原老师的教材，编写了我的第一个机器学习项目即
-</code></pre>
+        <h1 id="第一个机器学习项目"><a href="#第一个机器学习项目" class="headerlink" title="第一个机器学习项目"></a>第一个机器学习项目</h1><h1 id=""><a href="#" class="headerlink" title="============================"></a>============================</h1><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>&#160; &#160; &#160; &#160;                   刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：<br>&#160; &#160; &#160; &#160;<br> （1）导入数据。<br> （2）概述数据。<br> （3）数据可视化。<br> （4）评估算法。<br> （5）实施预测。<br>&#160; &#160; &#160; &#160; </p>
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><h3 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h3><p>&#160; &#160; &#160; &#160; 导入在项目中要使用的数据使用的类库和方法，代码如下：</p>
+<pre><code>from pandas import read_csv
+from pandas.plotting import scatter_matrix
+from matplotlib import pyplot
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+</code></pre><p>&#160; &#160; &#160; &#160; 所有类型的库的输入都不应有错误。如果出错，请暂时停下来配置一个完整的Scipy环境。</p>
+<h3 id="导入数据集"><a href="#导入数据集" class="headerlink" title="导入数据集"></a>导入数据集</h3>
       
     </div>
     
@@ -542,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个机器学习项目"><span class="nav-number">1.</span> <span class="nav-text">第一个机器学习项目</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个机器学习项目"><span class="nav-number">1.</span> <span class="nav-text">第一个机器学习项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">============================</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">2.1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
