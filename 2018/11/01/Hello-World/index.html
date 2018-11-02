@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
+<meta name="description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
 <meta name="keywords" content="python,莺尾花">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习中的Hello World">
 <meta property="og:url" content="http://yoursite.com/2018/11/01/Hello-World/index.html">
 <meta property="og:site_name" content="Dreamelover">
-<meta property="og:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
+<meta property="og:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/1.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/c4a08c0bbef2e750.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/60d490dea4fafce0.png">
-<meta property="og:updated_time" content="2018-11-02T09:51:10.997Z">
+<meta property="og:updated_time" content="2018-11-02T10:00:04.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World">
-<meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
+<meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
 <meta name="twitter:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/1.png">
 
 
@@ -347,7 +347,7 @@
       
 
       
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>&#160; &#160; &#160; &#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>&#160; &#160; &#160; &#160; 刚刚接触机器学习，参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：</p>
 <a id="more"></a>
 <p>&#160; &#160; &#160; &#160;<br> （1）导入数据。<br> （2）概述数据。<br> （3）数据可视化。<br> （4）评估算法。<br> （5）实施预测。<br>&#160; &#160; &#160; &#160; </p>
 <h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><h3 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h3><p>导入在项目中要使用的数据使用的类库和方法，代码如下：</p>
@@ -463,7 +463,7 @@ ax = fig.add_subplot(111)
 pyplot.boxplot(results)
 ax.set_xticklabels(models.keys())
 pyplot.show()
-</code></pre><h2 id="实施预测"><a href="#实施预测" class="headerlink" title="实施预测"></a>实施预测</h2><p>评估结果显示，支持向量机的是最准确的的算法。。现在使用数据集来验证这个算法模型。这将会对生成的算法模型的准确度有一个更加直观的认识。现使用全部训练集的数据来生成SVM的算法模型，并用预留的评估数据给出一个算法模型的报告。代码如下：</p>
+</code></pre><h2 id="实施预测"><a href="#实施预测" class="headerlink" title="实施预测"></a>实施预测</h2><p>&#160; &#160; &#160; &#160; 评估结果显示，支持向量机的是最准确的的算法。。现在使用数据集来验证这个算法模型。这将会对生成的算法模型的准确度有一个更加直观的认识。现使用全部训练集的数据来生成SVM的算法模型，并用预留的评估数据给出一个算法模型的报告。代码如下：</p>
 <pre><code>#使用评估数据集评估算法
 svm = SVC()
 svm.fit(X=X_train, y=Y_train)
@@ -471,7 +471,7 @@ predictions = svm.predict(X_validation)
 print (accuracy_score(Y_validation, predictions))
 print (confusion_matrix(Y_validation, predictions))
 print (classification_report(Y_validation, predictions))
-</code></pre><p>执行程序后，看到算法模型的准确度是0.93.通过冲突矩阵看到只有两个数据预测错误。最后还提供一个包含精确率（precision）、召回率（recell）、F1值（F1-score）等数据的报告。结果如下：</p>
+</code></pre><p>&#160; &#160; &#160; &#160; 执行程序后，看到算法模型的准确度是0.93.通过冲突矩阵看到只有两个数据预测错误。最后还提供一个包含精确率（precision）、召回率（recell）、F1值（F1-score）等数据的报告。结果如下：</p>
 <pre><code>0.9333333333333333
 [[ 7  0  0]
  [ 0 10  2]
@@ -485,7 +485,8 @@ Iris-virginica       0.85      1.00      0.92        11
 micro avg       0.93      0.93      0.93        30
 macro avg       0.95      0.94      0.94        30
 weighted avg       0.94      0.93      0.93        30
-</code></pre>
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&#160; &#160; &#160; &#160; 这是我机器学习的第一的项目，主要参考了魏贞原老师的《机器学习Python实践》，其中的大部分代码也是来源于书中，其中在hexo部署的时候主要是多个代码段连续插入出现问题。且许多代码还待深深咀嚼，更重要的是学会机器学习的各个步骤，很有收获，嘻嘻。 </p>
+
       
     </div>
     
@@ -683,7 +684,7 @@ weighted avg       0.94      0.93      0.93        30
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述数据"><span class="nav-number">3.</span> <span class="nav-text">概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估算法"><span class="nav-number">5.</span> <span class="nav-text">评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">分离出评估数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评估模型"><span class="nav-number">5.2.</span> <span class="nav-text">评估模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建模型"><span class="nav-number">5.3.</span> <span class="nav-text">创建模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实施预测"><span class="nav-number">6.</span> <span class="nav-text">实施预测</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.</span> <span class="nav-text">导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入类库"><span class="nav-number">2.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据集"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述数据"><span class="nav-number">3.</span> <span class="nav-text">概述数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据维度"><span class="nav-number">3.1.</span> <span class="nav-text">数据维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据自身"><span class="nav-number">3.2.</span> <span class="nav-text">查看数据自身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计数据的描述"><span class="nav-number">3.3.</span> <span class="nav-text">统计数据的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化"><span class="nav-number">4.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多变量图表"><span class="nav-number">4.1.</span> <span class="nav-text">多变量图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估算法"><span class="nav-number">5.</span> <span class="nav-text">评估算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分离出评估数据集"><span class="nav-number">5.1.</span> <span class="nav-text">分离出评估数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评估模型"><span class="nav-number">5.2.</span> <span class="nav-text">评估模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建模型"><span class="nav-number">5.3.</span> <span class="nav-text">创建模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实施预测"><span class="nav-number">6.</span> <span class="nav-text">实施预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
