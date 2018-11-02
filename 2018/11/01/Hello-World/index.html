@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/1.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/c4a08c0bbef2e750.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/60d490dea4fafce0.png">
-<meta property="og:updated_time" content="2018-11-01T14:54:57.876Z">
+<meta property="og:updated_time" content="2018-11-02T09:45:03.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World">
 <meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，按照参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
@@ -433,28 +433,22 @@ pyplot.show()
 <li>贝叶斯分类器（NB）</li>
 <li>支持向量机（SVM）</li>
 </ul>
-<p>&#160; &#160; &#160; &#160; 在每次对算法的评估前都会重置随机数的种子，以确保每次对算法评估都使用相同的数据集，接下来就创建并评估六种算法模型。代码如下:</p>
-<pre><code>#算法审查
-models = {}
-models[&apos;LR&apos;] = LogisticRegression()
-models[&apos;LDA&apos;] = LinearDiscriminantAnalysis()
-models[&apos;KNN&apos;] = KNeighborsClassifier()
-models[&apos;CART&apos;] = DecisionTreeClassifier()
-models[&apos;NB&apos;] = GaussianNB()
-models[&apos;SVM&apos;] = SVC()
-#评估算法
-results = []
-for key in models:
-  kfold = model_selection.KFold(n_splits=10, random_state=seed)
-  cv_reults = model_selection.cross_val_score(models[key], X_train, Y_train, cv=kfold, scoring=&apos;accuracy&apos; )
-  results.append(cv_reults)
-  print(&apos;%s: %f (%f)&apos; %(key, cv_reults.mean(), cv_reults.std()))
-</code></pre><p>执行结果如下：</p>
-<pre><code>LR: 0.966667 (0.040825)
-LDA: 0.975000 (0.038188)
-KNN: 0.983333 (0.033333)
-CART: 0.983333 (0.033333)
-NB: 0.975000 (0.053359)
+<p>&#160; &#160; &#160; &#160; 在每次对算法的评估前都会重置随机数的种子，以确保每次对算法评估都使用相同的数据集，接下来就创建并评估六种算法模型。代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#算法审查</span><br><span class="line">models = &#123;&#125;</span><br><span class="line">models[&apos;LR&apos;] = LogisticRegression()</span><br><span class="line">models[&apos;LDA&apos;] = LinearDiscriminantAnalysis()</span><br><span class="line">models[&apos;KNN&apos;] = KNeighborsClassifier()</span><br><span class="line">models[&apos;CART&apos;] = DecisionTreeClassifier()</span><br><span class="line">models[&apos;NB&apos;] = GaussianNB()</span><br><span class="line">models[&apos;SVM&apos;] = SVC()</span><br><span class="line">#评估算法</span><br><span class="line">results = []</span><br><span class="line">for key in models:</span><br><span class="line">  kfold = model_selection.KFold(n_splits=10, random_state=seed)</span><br><span class="line">  cv_reults = model_selection.cross_val_score(models[key], X_train, Y_train, cv=kfold, scoring=&apos;accuracy&apos; )</span><br><span class="line">  results.append(cv_reults)</span><br><span class="line">  print(&apos;%s: %f (%f)&apos; %(key, cv_reults.mean(), cv_reults.std()))</span><br><span class="line">``` </span><br><span class="line">执行结果如下：</span><br><span class="line"></span><br><span class="line">    LR: 0.966667 (0.040825)</span><br><span class="line">    LDA: 0.975000 (0.038188)</span><br><span class="line">    KNN: 0.983333 (0.033333)</span><br><span class="line">    CART: 0.983333 (0.033333)</span><br><span class="line">    NB: 0.975000 (0.053359)</span><br><span class="line"></span><br><span class="line">通过结果可知SVM算法的准确度最高，接下来箱线图，通过箱线图来比较算法的评估结果。代码如下：</span><br><span class="line"></span><br><span class="line">    #箱线图的比较算法</span><br><span class="line">    fig = pyplot.figure()</span><br><span class="line">    fig.suptitle(&apos;Algorithm Comparision&apos;)</span><br><span class="line">    ax = fig.add_subplot(111)</span><br><span class="line">    pyplot.boxplot(results)</span><br><span class="line">    ax.set_xticklabels(models.keys())</span><br><span class="line">    pyplot.show()</span><br><span class="line">    </span><br><span class="line">## 实施预测</span><br><span class="line">评估结果显示，支持向量机的是最准确的的算法。。现在使用数据集来验证这个算法模型。这将会对生成的算法模型的准确度有一个更加直观的认识。现使用全部训练集的数据来生成SVM的算法模型，并用预留的评估数据给出一个算法模型的报告。代码如下：</span><br></pre></td></tr></table></figure></p>
+<p>#使用评估数据集评估算法<br>svm = SVC()<br>svm.fit(X=X_train, y=Y_train)<br>predictions = svm.predict(X_validation)<br>print (accuracy_score(Y_validation, predictions))<br>print (confusion_matrix(Y_validation, predictions))<br>print (classification_report(Y_validation, predictions))<br><code>`</code></p>
+<p>执行程序后，看到算法模型的准确度是0.93.通过冲突矩阵看到只有两个数据预测错误。最后还提供一个包含精确率（precision）、召回率（recell）、F1值（F1-score）等数据的报告。结果如下：</p>
+<pre><code>0.9333333333333333
+[[ 7  0  0]
+ [ 0 10  2]
+ [ 0  0 11]]
+                 precision    recall  f1-score   support
+
+Iris-setosa       1.00      1.00      1.00         7
+Iris-versicolor       1.00      0.83      0.91        12
+Iris-virginica       0.85      1.00      0.92        11
+
+micro avg       0.93      0.93      0.93        30
+macro avg       0.95      0.94      0.94        30
+weighted avg       0.94      0.93      0.93        30
 </code></pre>
       
     </div>
