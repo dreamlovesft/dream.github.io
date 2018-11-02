@@ -90,7 +90,8 @@
 <meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/1.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/c4a08c0bbef2e750.png">
 <meta property="og:image" content="http://i2.bvimg.com/663692/60d490dea4fafce0.png">
-<meta property="og:updated_time" content="2018-11-02T10:00:04.995Z">
+<meta property="og:image" content="https://github.com/dreamlovesft/Markdown-Photos/raw/master/4.png">
+<meta property="og:updated_time" content="2018-11-02T10:11:20.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的Hello World">
 <meta name="twitter:description" content="写在前面&amp;#160; &amp;#160; &amp;#160; &amp;#160; 刚刚接触机器学习，参考魏贞原老师的教材，完成了我的第一个机器学习项目即莺尾花分类问题。数据集是含莺尾花三个亚属的分类信息，通过机器学习算法生成一个模型，自动分类新数据到这三个亚属的其中的一个。下面是这个项目实现的步骤：">
@@ -463,7 +464,8 @@ ax = fig.add_subplot(111)
 pyplot.boxplot(results)
 ax.set_xticklabels(models.keys())
 pyplot.show()
-</code></pre><h2 id="实施预测"><a href="#实施预测" class="headerlink" title="实施预测"></a>实施预测</h2><p>&#160; &#160; &#160; &#160; 评估结果显示，支持向量机的是最准确的的算法。。现在使用数据集来验证这个算法模型。这将会对生成的算法模型的准确度有一个更加直观的认识。现使用全部训练集的数据来生成SVM的算法模型，并用预留的评估数据给出一个算法模型的报告。代码如下：</p>
+</code></pre><p>执行结果如下：<br><img src="https://github.com/dreamlovesft/Markdown-Photos/raw/master/4.png" alt=""></p>
+<h2 id="实施预测"><a href="#实施预测" class="headerlink" title="实施预测"></a>实施预测</h2><p>&#160; &#160; &#160; &#160; 评估结果显示，支持向量机的是最准确的的算法。。现在使用数据集来验证这个算法模型。这将会对生成的算法模型的准确度有一个更加直观的认识。现使用全部训练集的数据来生成SVM的算法模型，并用预留的评估数据给出一个算法模型的报告。代码如下：</p>
 <pre><code>#使用评估数据集评估算法
 svm = SVC()
 svm.fit(X=X_train, y=Y_train)
