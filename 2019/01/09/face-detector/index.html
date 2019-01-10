@@ -82,15 +82,15 @@
 <meta name="description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="face_detector">
+<meta property="og:title" content="人脸检测">
 <meta property="og:url" content="http://yoursite.com/2019/01/09/face-detector/index.html">
 <meta property="og:site_name" content="Dreamelover">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/01/09/face-detector/photo/f1.png">
-<meta property="og:updated_time" content="2019-01-10T12:19:25.253Z">
+<meta property="og:updated_time" content="2019-01-10T12:26:14.049Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="face_detector">
+<meta name="twitter:title" content="人脸检测">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/09/face-detector/photo/f1.png">
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>face_detector | Dreamelover</title>
+  <title>人脸检测 | Dreamelover</title>
   
 
 
@@ -273,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">face_detector</h1>
+          <h1 class="post-title" itemprop="name headline">人脸检测</h1>
         
 
         <div class="post-meta">
@@ -346,17 +346,17 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&#160; &#160; &#160; &#160;这是本人第一个比较像项目的小项目。嘻嘻<br><a id="more"></a></p>
-<p>本次主要完成两个任务：（1）基于图片的人脸检测 （2）基于视频的人脸检测。分两篇博客讲完。</p>
-<p>需要用到的文件夹挂在Guihub包括：</p>
+<p>&#160; &#160; &#160; &#160;本次主要完成两个任务：（1）基于图片的人脸检测 （2）基于视频的人脸检测。分两篇博客讲完。</p>
+<p>&#160; &#160; &#160; &#160;需要用到的文件夹挂在Guihub包括：</p>
 <ul>
 <li>人脸分类器（cascades），采用已训练好的 Haar cascade classifiers。此分类器被序列化为XML文件。调用cv2.CascadeClassifier将反序列化分类器，将其加载到内存中，并允许其检测图像中的脸。</li>
 <li>图片文件夹（image），其中为待检测的图片。</li>
 <li>pyimagesearch，在其中的facedetector模块中定义了一个FaceDetector类。使用argparse来解析命令行参数。</li>
 <li>detect_faces， 主程序</li>
 </ul>
-<h2 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h2><p>首先，我们要导入本算法所需要的包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import print_function</span><br><span class="line">from pyimagesearch.facedetector import FaceDetector</span><br><span class="line">import argparse</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure></p>
+<h2 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h2><p>&#160; &#160; &#160; &#160;首先，我们要导入本算法所需要的包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import print_function</span><br><span class="line">from pyimagesearch.facedetector import FaceDetector</span><br><span class="line">import argparse</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure></p>
 <p>使用argparse来解析命令行参数,要养成良好的习惯。</p>
-<h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p>接下来是参数接收阶段，我感觉也可以理解为有点预处理阶段的意思（也算是一种类吧），代码段长这样： </p>
+<h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p>&#160; &#160; &#160; &#160;接下来是参数接收阶段，我感觉也可以理解为有点预处理阶段的意思（也算是一种类吧），代码段长这样： </p>
 <pre><code>ap = argparse.ArgumentParser()
 ap.add_argument(&quot;-f&quot;, &quot;face&quot;, required=True,
     help=&apos;path to where the face cascade resides&apos;)
@@ -366,9 +366,9 @@ args = vars(ap.parse_arg())
 
 image = cv2.imread(args[&quot;image&quot;])
 gray = cv2.cvtColor(image, cv2.COLOER_BGR2GRAY)
-</code></pre><p>就像前面说的那样，参与解析命令行参数来接受，我理解为这样做能尽量保持源码的封装性；两个参数即（-f/–face）cascades分类器所处路径及(-i/–image)待检测图片所处路径。</p>
-<h2 id="建立自定义类"><a href="#建立自定义类" class="headerlink" title="建立自定义类"></a>建立自定义类</h2><p>我们需要定义一个类来处理我们如何在图像中找到脸。没错就是 facedetector.py这个东东 ，它里面长这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># import the necessary packages</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">class FaceDetector:</span><br><span class="line">	def __init__(self, faceCascadePath):</span><br><span class="line">		# load the face detector</span><br><span class="line">		self.faceCascade = cv2.CascadeClassifier(faceCascadePath)</span><br><span class="line"></span><br><span class="line">	def detect(self, image, scaleFactor = 1.1, minNeighbors = 5, minSize = (30, 30)):</span><br><span class="line">		# detect faces in the image</span><br><span class="line">		rects = self.faceCascade.detectMultiScale(image,</span><br><span class="line">			scaleFactor = scaleFactor, minNeighbors = minNeighbors,</span><br><span class="line">			minSize = minSize, flags = cv2.CASCADE_SCALE_IMAGE)</span><br><span class="line"></span><br><span class="line">		# return the rectangles representing bounding</span><br><span class="line">		# boxes around the faces</span><br><span class="line">		return rects</span><br></pre></td></tr></table></figure></p>
-<p>这个类就是用来封装执行面部检测所需的所有逻辑的。说一下这里的<strong>init</strong>()是一个用来初始化或者说实例化的“壳”，self就是实例化后的函数自己，参数是cascades分类器所处路径。detect()是实际执行待检测图片有没有脸的，需要传递的参数是待检测图片。后面的三个常量参数的作用我搬来了，是这样子滴：</p>
+</code></pre><p>&#160; &#160; &#160; &#160;就像前面说的那样，参与解析命令行参数来接受，我理解为这样做能尽量保持源码的封装性；两个参数即（-f/–face）cascades分类器所处路径及(-i/–image)待检测图片所处路径。</p>
+<h2 id="建立自定义类"><a href="#建立自定义类" class="headerlink" title="建立自定义类"></a>建立自定义类</h2><p>&#160; &#160; &#160; &#160;我们需要定义一个类来处理我们如何在图像中找到脸。没错就是 facedetector.py这个东东 ，它里面长这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># import the necessary packages</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">class FaceDetector:</span><br><span class="line">	def __init__(self, faceCascadePath):</span><br><span class="line">		# load the face detector</span><br><span class="line">		self.faceCascade = cv2.CascadeClassifier(faceCascadePath)</span><br><span class="line"></span><br><span class="line">	def detect(self, image, scaleFactor = 1.1, minNeighbors = 5, minSize = (30, 30)):</span><br><span class="line">		# detect faces in the image</span><br><span class="line">		rects = self.faceCascade.detectMultiScale(image,</span><br><span class="line">			scaleFactor = scaleFactor, minNeighbors = minNeighbors,</span><br><span class="line">			minSize = minSize, flags = cv2.CASCADE_SCALE_IMAGE)</span><br><span class="line"></span><br><span class="line">		# return the rectangles representing bounding</span><br><span class="line">		# boxes around the faces</span><br><span class="line">		return rects</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;这个类就是用来封装执行面部检测所需的所有逻辑的。说一下这里的<strong>init</strong>()是一个用来初始化或者说实例化的“壳”，self就是实例化后的函数自己，参数是cascades分类器所处路径。detect()是实际执行待检测图片有没有脸的，需要传递的参数是待检测图片。后面的三个常量参数的作用我搬来了，是这样子滴：</p>
 <ul>
 <li>scaleFactor：在每个图像比例下图像尺寸减少了多少。此值用于创建比例金字塔，以便检测图像中多个比例的脸（某些面可能更接近前景，因此更大;其他面可能更小，在背景中，因此使用不同尺度）。值为1.05表示J在金字塔的每个级别上将图像的大小减少了5％。</li>
 <li>minNeighbors: 每个窗口应该有多少个邻居，窗口中的区域被认为是一个脸。级联分类器将检测面部周围的多个窗口。此参数控制需要为要标记为面的窗口检测多少个矩形（邻居）。</li>
