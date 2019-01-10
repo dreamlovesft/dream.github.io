@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="Dreamelover">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/01/09/face-detector/photo/f1.png">
-<meta property="og:updated_time" content="2019-01-10T12:26:14.049Z">
+<meta property="og:image" content="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png">
+<meta property="og:updated_time" content="2019-01-10T13:24:30.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人脸检测">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/09/face-detector/photo/f1.png">
+<meta name="twitter:image" content="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png">
 
 
 
@@ -355,7 +355,7 @@
 <li>detect_faces， 主程序</li>
 </ul>
 <h2 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h2><p>&#160; &#160; &#160; &#160;首先，我们要导入本算法所需要的包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import print_function</span><br><span class="line">from pyimagesearch.facedetector import FaceDetector</span><br><span class="line">import argparse</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure></p>
-<p>使用argparse来解析命令行参数,要养成良好的习惯。</p>
+<p>&#160; &#160; &#160; &#160;使用argparse来解析命令行参数,要养成良好的习惯。</p>
 <h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p>&#160; &#160; &#160; &#160;接下来是参数接收阶段，我感觉也可以理解为有点预处理阶段的意思（也算是一种类吧），代码段长这样： </p>
 <pre><code>ap = argparse.ArgumentParser()
 ap.add_argument(&quot;-f&quot;, &quot;face&quot;, required=True,
@@ -375,7 +375,7 @@ gray = cv2.cvtColor(image, cv2.COLOER_BGR2GRAY)
 <li>minSize: 宽度和高度（以像素为单位）的元组，用于指示窗口的最小尺寸。小于此大小的边界框将被忽略。一般操作是从（30,30）开始并从那里进行微调。</li>
 </ul>
 <p>&#160; &#160; &#160; &#160;通过调用在FaceDetector类的构造函数中创建的分类器的detectMultiScale方法，检测图像中的实际面</p>
-<h2 id="下面实例化算法"><a href="#下面实例化算法" class="headerlink" title="下面实例化算法"></a>下面实例化算法</h2><p>&#160; &#160; &#160; &#160;以上算法模型构建完成，接下只需要将模型实例化即可。代码段长这样：</p>
+<h2 id="实例化算法"><a href="#实例化算法" class="headerlink" title="实例化算法"></a>实例化算法</h2><p>&#160; &#160; &#160; &#160;以上算法模型构建完成，接下只需要将模型实例化即可。代码段长这样：</p>
 <pre><code>fd = FaceDetector(args[&apos;face&apos;])
 faceRects = fd.detect(gray, scaleFactor=1.1, minNeighbors=5,
     minSize=(30,30))
@@ -385,7 +385,7 @@ for (x, y, w, h) in faceRects:
     cv2.rectangle(image, (x,y), (x+w, y+h), (0,255,0), 2)
 
 cv2.imshow(&apos;face&apos;, image)
-</code></pre><p>&#160; &#160; &#160; &#160;这里说一下for循环是为了在图像周围实际绘制一个边界框。同样，每个边界框只是一个有四个值的元组：x和y的起始位置在图像，然后是脸部的宽度和高度。好了第一部分至此完成了，但是要说明的是对一些图像可能其中的脸并不能识别出来，或者有些框里并没有人脸，那么只需调整一下scaleFactor的值，因为他是最敏感的。当然如果无论怎么调参人脸都检测不出来，那我们不要在浪费时间了，放弃吧。。。。<br>下面是算法的结果。<br><img src="photo/f1.png" alt=""></p>
+</code></pre><p>&#160; &#160; &#160; &#160;这里说一下for循环是为了在图像周围实际绘制一个边界框。同样，每个边界框只是一个有四个值的元组：x和y的起始位置在图像，然后是脸部的宽度和高度。好了第一部分至此完成了，但是要说明的是对一些图像可能其中的脸并不能识别出来，或者有些框里并没有人脸，那么只需调整一下scaleFactor的值，因为他是最敏感的。当然如果无论怎么调参人脸都检测不出来，那我们不要在浪费时间了，放弃吧。。。。<br>下面是算法的结果。<br><img src="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png" alt=""></p>
 
       
     </div>
@@ -582,7 +582,7 @@ cv2.imshow(&apos;face&apos;, image)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入类库"><span class="nav-number">1.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参"><span class="nav-number">1.2.</span> <span class="nav-text">传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立自定义类"><span class="nav-number">1.3.</span> <span class="nav-text">建立自定义类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面实例化算法"><span class="nav-number">1.4.</span> <span class="nav-text">下面实例化算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入类库"><span class="nav-number">1.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参"><span class="nav-number">1.2.</span> <span class="nav-text">传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立自定义类"><span class="nav-number">1.3.</span> <span class="nav-text">建立自定义类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化算法"><span class="nav-number">1.4.</span> <span class="nav-text">实例化算法</span></a></li></ol></li></ol></div>
             
 
           </div>
