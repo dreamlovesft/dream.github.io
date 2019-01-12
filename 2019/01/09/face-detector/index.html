@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/09/face-detector/photo/f2.png">
-<meta property="og:updated_time" content="2019-01-11T12:35:26.358Z">
+<meta property="og:updated_time" content="2019-01-12T00:11:12.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人脸检测">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
@@ -359,9 +359,9 @@
 <p>&#160; &#160; &#160; &#160;使用argparse来解析命令行参数,要养成良好的习惯。</p>
 <h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p>&#160; &#160; &#160; &#160;接下来是参数接收阶段，我感觉也可以理解为有点预处理阶段的意思（也算是一种类吧），代码段长这样： </p>
 <pre><code>ap = argparse.ArgumentParser()
-ap.add_argument(&quot;-f&quot;, &quot;face&quot;, required=True,
+ap.add_argument(&quot;-f&quot;, &quot;--face&quot;, required=True,
     help=&apos;path to where the face cascade resides&apos;)
-ap.add_argument(&quot;-i&quot;, &quot;image&quot;, required=True,
+ap.add_argument(&quot;-i&quot;, &quot;--image&quot;, required=True,
     help=&apos;path to where the image file resides&apos;)
 args = vars(ap.parse_arg())
 
