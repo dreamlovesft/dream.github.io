@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Dreamelover">
 <meta property="og:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;本篇博客接上一篇博客，是人脸检测算法的第二部分，讲述如何检测视频中的人脸，也是为了巩固一下所学到的知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-12T10:16:50.071Z">
+<meta property="og:updated_time" content="2019-01-12T10:24:28.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人脸检测（二）">
 <meta name="twitter:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;本篇博客接上一篇博客，是人脸检测算法的第二部分，讲述如何检测视频中的人脸，也是为了巩固一下所学到的知识。">
@@ -343,7 +343,7 @@
       
 
       
-        <p>&#160; &#160; &#160; &#160;本篇博客接上一篇博客，是人脸检测算法的第二部分，讲述如何检测视频中的人脸，也是为了巩固一下所学到的知识。<br><a id="more"></a><br>&#160; &#160; &#160; &#160;本文中的视频有两种：其一为本地保存的视频，其二为来自于电脑摄像头的视频。有了上一篇博客作为基础，所以操作起来比较容易。所用到的的文件挂在</p>
+        <p>&#160; &#160; &#160; &#160;本篇博客接上一篇博客，是人脸检测算法的第二部分，讲述如何检测视频中的人脸，也是为了巩固一下所学到的知识。<br><a id="more"></a><br>&#160; &#160; &#160; &#160;本文中的视频有两种：其一为本地保存的视频，其二为来自于电脑摄像头的视频。有了上一篇博客作为基础，所以操作起来比较容易。所用到的的文件挂在<a href="https://github.com/dreamlovesft/CamFaceDetector" target="_blank" rel="noopener">Guihub</a></p>
 <h1 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h1><pre><code># USAGE
 # python webcam.py qq
 
@@ -415,7 +415,41 @@ else:
         camera.release()
         cv2.destroyAllWindows()
 </code></pre><p>&#160; &#160; &#160; &#160;代码段里使用了一个if语句来实现判断视频是源自本地还是摄像头。其中，if not args.get(‘video’, False):…，else:..表示如果解析命令行参数是没有–vedio参数，则打开摄像头，获取实时视频，否则读取本地视频。<br>效果如下：</p>
-<iframe height="300" width="300" src="doge">
+<iframe height="500" width="450" src="http://i2.bvimg.com/663692/1bd6d03866f5969a.gif">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
