@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Dreamelover">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png">
-<meta property="og:image" content="http://yoursite.com/2019/01/09/face-detector/photo/f2.png">
-<meta property="og:updated_time" content="2019-01-12T00:11:12.965Z">
+<meta property="og:image" content="https://i.loli.net/2019/01/12/5c39ce030126f.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/12/5c39cc7fc8223.png">
+<meta property="og:updated_time" content="2019-01-12T11:24:43.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人脸检测">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
-<meta name="twitter:image" content="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/12/5c39ce030126f.png">
 
 
 
@@ -386,8 +386,8 @@ for (x, y, w, h) in faceRects:
     cv2.rectangle(image, (x,y), (x+w, y+h), (0,255,0), 2)
 
 cv2.imshow(&apos;face&apos;, image)
-</code></pre><p>&#160; &#160; &#160; &#160;这里说一下for循环是为了在图像周围实际绘制一个边界框。同样，每个边界框只是一个有四个值的元组：x和y的起始位置在图像，然后是脸部的宽度和高度。好了第一部分至此完成了，但是要说明的是对一些图像可能其中的脸并不能识别出来，或者有些框里并没有人脸，那么只需调整一下scaleFactor的值，因为他是最敏感的。当然如果无论怎么调参人脸都检测不出来，那我们不要在浪费时间了，放弃吧。。。。<br>下面是算法的结果。<br><img src="https://github.com/dreamlovesft/Face-Detector/blob/master/f1.png" alt=""></p>
-<p><img src="photo/f2.png" alt=""></p>
+</code></pre><p>&#160; &#160; &#160; &#160;这里说一下for循环是为了在图像周围实际绘制一个边界框。同样，每个边界框只是一个有四个值的元组：x和y的起始位置在图像，然后是脸部的宽度和高度。好了第一部分至此完成了，但是要说明的是对一些图像可能其中的脸并不能识别出来，或者有些框里并没有人脸，那么只需调整一下scaleFactor的值，因为他是最敏感的。当然如果无论怎么调参人脸都检测不出来，那我们不要在浪费时间了，放弃吧。。。。<br>下面是算法的结果。<br><img src="https://i.loli.net/2019/01/12/5c39ce030126f.png" alt="f1.png"></p>
+<p><img src="https://i.loli.net/2019/01/12/5c39cc7fc8223.png" alt="f2.png"></p>
 
       
     </div>
