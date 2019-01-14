@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,人脸检测," />
+  <meta name="keywords" content="Python,EyeTracker," />
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
-<meta name="keywords" content="Python,人脸检测">
+<meta name="description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这一篇博客记叙跟踪人眼的算法，需要的参考资料挂在github上了，&amp;lt;! –more–&amp;gt;包括：  classifiers， 被序列化为XML文件的分类器包括人脸检测器和人眼跟踪器。 pyimagesearch， 自定义类包 video， 待处理视频 eyetrcking.py 主算法程序  &amp;#160; &amp;#160; &amp;#160;">
+<meta name="keywords" content="Python,EyeTracker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人脸检测（一）">
-<meta property="og:url" content="http://yoursite.com/2019/01/09/face-detector/index.html">
+<meta property="og:title" content="眼睛追踪">
+<meta property="og:url" content="http://yoursite.com/2019/01/14/眼睛追踪/index.html">
 <meta property="og:site_name" content="Dreamelover">
-<meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
+<meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这一篇博客记叙跟踪人眼的算法，需要的参考资料挂在github上了，&amp;lt;! –more–&amp;gt;包括：  classifiers， 被序列化为XML文件的分类器包括人脸检测器和人眼跟踪器。 pyimagesearch， 自定义类包 video， 待处理视频 eyetrcking.py 主算法程序  &amp;#160; &amp;#160; &amp;#160;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/01/12/5c39ce030126f.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/12/5c39cc7fc8223.png">
-<meta property="og:updated_time" content="2019-01-12T11:51:24.469Z">
+<meta property="og:updated_time" content="2019-01-14T13:28:07.233Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人脸检测（一）">
-<meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这是本人第一个比较像项目的小项目。嘻嘻">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/12/5c39ce030126f.png">
+<meta name="twitter:title" content="眼睛追踪">
+<meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160; &amp;#160;这一篇博客记叙跟踪人眼的算法，需要的参考资料挂在github上了，&amp;lt;! –more–&amp;gt;包括：  classifiers， 被序列化为XML文件的分类器包括人脸检测器和人眼跟踪器。 pyimagesearch， 自定义类包 video， 待处理视频 eyetrcking.py 主算法程序  &amp;#160; &amp;#160; &amp;#160;">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/09/face-detector/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/14/眼睛追踪/"/>
 
 
 
 
 
-  <title>人脸检测（一） | Dreamelover</title>
+  <title>眼睛追踪 | Dreamelover</title>
   
 
 
@@ -257,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/09/face-detector/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/眼睛追踪/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -274,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">人脸检测（一）</h1>
+          <h1 class="post-title" itemprop="name headline">眼睛追踪</h1>
         
 
         <div class="post-meta">
@@ -286,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T10:52:01+08:00">
-                2019-01-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-14T21:24:07+08:00">
+                2019-01-14
               </time>
             
 
@@ -346,48 +343,72 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&#160; &#160; &#160; &#160;这是本人第一个比较像项目的小项目。嘻嘻<br><a id="more"></a></p>
-<p>&#160; &#160; &#160; &#160;本次主要完成两个任务：（1）基于图片的人脸检测 （2）基于视频的人脸检测。分两篇博客讲完。</p>
-<p>&#160; &#160; &#160; &#160;需要用到的文件夹挂在<a href="https://github.com/dreamlovesft/Face-Detector" target="_blank" rel="noopener">Guihub</a>包括：</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&#160; &#160; &#160; &#160;这一篇博客记叙跟踪人眼的算法，需要的参考资料挂在<a href="https://github.com/dreamlovesft/EyeTracker" target="_blank" rel="noopener">github</a>上了，&lt;! –more–&gt;包括：</p>
 <ul>
-<li>人脸分类器（cascades），采用已训练好的 Haar cascade classifiers。此分类器被序列化为XML文件。调用cv2.CascadeClassifier将反序列化分类器，将其加载到内存中，并允许其检测图像中的脸。</li>
-<li>图片文件夹（image），其中为待检测的图片。</li>
-<li>pyimagesearch，在其中的facedetector模块中定义了一个FaceDetector类。使用argparse来解析命令行参数。</li>
-<li>detect_faces， 主程序</li>
+<li>classifiers， 被序列化为XML文件的分类器包括人脸检测器和人眼跟踪器。</li>
+<li>pyimagesearch， 自定义类包</li>
+<li>video， 待处理视频</li>
+<li>eyetrcking.py 主算法程序</li>
 </ul>
-<h2 id="导入类库"><a href="#导入类库" class="headerlink" title="导入类库"></a>导入类库</h2><p>&#160; &#160; &#160; &#160;首先，我们要导入本算法所需要的包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import print_function</span><br><span class="line">from pyimagesearch.facedetector import FaceDetector</span><br><span class="line">import argparse</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure></p>
-<p>&#160; &#160; &#160; &#160;使用argparse来解析命令行参数,要养成良好的习惯。</p>
-<h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p>&#160; &#160; &#160; &#160;接下来是参数接收阶段，我感觉也可以理解为有点预处理阶段的意思（也算是一种类吧），代码段长这样： </p>
-<pre><code>ap = argparse.ArgumentParser()
-ap.add_argument(&quot;-f&quot;, &quot;--face&quot;, required=True,
-    help=&apos;path to where the face cascade resides&apos;)
-ap.add_argument(&quot;-i&quot;, &quot;--image&quot;, required=True,
-    help=&apos;path to where the image file resides&apos;)
-args = vars(ap.parse_arg())
+<p>&#160; &#160; &#160; &#160;算法流程为：（1）检测视频每一帧里的人脸（2）提取人脸作为人眼跟踪的ROI区（3）在ROI区检测跟踪人眼</p>
+<h1 id="建立自定义类"><a href="#建立自定义类" class="headerlink" title="建立自定义类"></a>建立自定义类</h1><p>&#160; &#160; &#160; &#160;由于我们要先检测到每一帧重点人脸，所以要像前面那两篇博客里讲述的那样要定义人脸检测函数，同理跟踪人眼同样需要一个函数，我们将这两个函数放在一个类里面，定义为EyeTracke。<br>它长这样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># import the necessary packages</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">class EyeTracker:</span><br><span class="line">    def __init__(self, faceCascadePath, eyeCascadePath):</span><br><span class="line">        # load the face and eye detector</span><br><span class="line">        self.faceCascade = cv2.CascadeClassifier(faceCascadePath)</span><br><span class="line">        self.eyeCascade = cv2.CascadeClassifier(eyeCascadePath)</span><br><span class="line"></span><br><span class="line">    def track(self, image):</span><br><span class="line">        # detect faces in the image and initialize the list of</span><br><span class="line">        # rectangles containing the faces and eyes</span><br><span class="line">        faceRects = self.faceCascade.detectMultiScale(image,</span><br><span class="line">            scaleFactor = 1.1, minNeighbors = 5, minSize = (30, 30),</span><br><span class="line">            flags = cv2.CASCADE_SCALE_IMAGE)</span><br><span class="line">        rects = []</span><br><span class="line"></span><br><span class="line">        # loop over the face bounding boxes</span><br><span class="line">        for (fX, fY, fW, fH) in faceRects:</span><br><span class="line">            # extract the face ROI and update the list of</span><br><span class="line">            # bounding boxes</span><br><span class="line">            faceROI = image[fY:fY + fH, fX:fX + fW]</span><br><span class="line">            rects.append((fX, fY, fX + fW, fY + fH))</span><br><span class="line">            </span><br><span class="line">            # detect eyes in the face ROI</span><br><span class="line">            eyeRects = self.eyeCascade.detectMultiScale(faceROI,</span><br><span class="line">                scaleFactor = 1.1, minNeighbors = 10, minSize = (20, 20),</span><br><span class="line">                flags = cv2.CASCADE_SCALE_IMAGE)</span><br><span class="line"></span><br><span class="line">            # loop over the eye bounding boxes</span><br><span class="line">            for (eX, eY, eW, eH) in eyeRects:</span><br><span class="line">                # update the list of boounding boxes</span><br><span class="line">                rects.append(</span><br><span class="line">                    (fX + eX, fY + eY, fX + eX + eW, fY + eY + eH))</span><br><span class="line"></span><br><span class="line">        # return the rectangles representing bounding</span><br><span class="line">        # boxes around the faces and eyes</span><br><span class="line">        return rects</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;这里的<strong>init</strong>()函数仍做实例化类的“壳”， 它的三个参数self为实例化类后的本身，faceCascadePath为人脸分类器（haarcascade_eye.xml）文件的路径，eyeCascadePath为人眼分类器（haarcascade_frontalface_default.xml）的路径。track()函数用来实现在图像中找到眼睛并将人眼用边界框包围起来。需要传递的参数仅有一个即image待处理的每一帧图片。<br>调用faceCascade classifier的detectMultiScale返回图像中每个人脸的边界框位置（即，x，y，宽度和高度）。rects = []用来初始化将来储存人脸边界框和眼睛边界框位置的信息。第一个for循环用来将检测到的每一个人脸的边界框定义为face Region of Interest (ROI)，下面将会以ROI区域提取出来并作为处理对象。同时将人脸的边界框位置信息储存在rect[]里.<br>然后，在ROI区检测跟踪眼睛，同样调用eyeCascade classifie的detectMultiScale返回图像中每个人脸中的眼睛的位置，需要注意的是眼睛边界框的位置坐标是相对于ROI坐标系而不是图片坐标系的，并将其储存在rect[]中。最后将储存所有人脸和眼睛位置信息的rects[]传出。</p>
+<h1 id="实例化算法"><a href="#实例化算法" class="headerlink" title="实例化算法"></a>实例化算法</h1><p>&#160; &#160; &#160; &#160;本部分要完成的任务有：（1）定义命令行解析并传参；（2）判断视频来自本地还是摄像头；（3）从视频里提取帧并做尺寸调整和灰度化（4）以rect[]里的元素为参画矩形即显示人脸和眼睛的边界框。代码段长这样：</p>
+<pre><code>from pyimagesearch.eyetracker import EyeTracker
+from pyimagesearch import imutils
+import argparse
+import cv2
 
-image = cv2.imread(args[&quot;image&quot;])
-gray = cv2.cvtColor(image, cv2.COLOER_BGR2GRAY)
-</code></pre><p>&#160; &#160; &#160; &#160;就像前面说的那样，参与解析命令行参数来接受，我理解为这样做能尽量保持源码的封装性；两个参数即（-f/–face）cascades分类器所处路径及(-i/–image)待检测图片所处路径。</p>
-<h2 id="建立自定义类"><a href="#建立自定义类" class="headerlink" title="建立自定义类"></a>建立自定义类</h2><p>&#160; &#160; &#160; &#160;我们需要定义一个类来处理我们如何在图像中找到脸。没错就是 facedetector.py这个东东 ，它里面长这样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># import the necessary packages</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">class FaceDetector:</span><br><span class="line">	def __init__(self, faceCascadePath):</span><br><span class="line">		# load the face detector</span><br><span class="line">		self.faceCascade = cv2.CascadeClassifier(faceCascadePath)</span><br><span class="line"></span><br><span class="line">	def detect(self, image, scaleFactor = 1.1, minNeighbors = 5, minSize = (30, 30)):</span><br><span class="line">		# detect faces in the image</span><br><span class="line">		rects = self.faceCascade.detectMultiScale(image,</span><br><span class="line">			scaleFactor = scaleFactor, minNeighbors = minNeighbors,</span><br><span class="line">			minSize = minSize, flags = cv2.CASCADE_SCALE_IMAGE)</span><br><span class="line"></span><br><span class="line">		# return the rectangles representing bounding</span><br><span class="line">		# boxes around the faces</span><br><span class="line">		return rects</span><br></pre></td></tr></table></figure></p>
-<p>&#160; &#160; &#160; &#160;这个类就是用来封装执行面部检测所需的所有逻辑的。说一下这里的<strong>init</strong>()是一个用来初始化或者说实例化的“壳”，self就是实例化后的函数自己，参数是cascades分类器所处路径。detect()是实际执行待检测图片有没有脸的，需要传递的参数是待检测图片。后面的三个常量参数的作用我搬来了，是这样子滴：</p>
-<ul>
-<li>scaleFactor：在每个图像比例下图像尺寸减少了多少。此值用于创建比例金字塔，以便检测图像中多个比例的脸（某些面可能更接近前景，因此更大;其他面可能更小，在背景中，因此使用不同尺度）。值为1.05表示J在金字塔的每个级别上将图像的大小减少了5％。</li>
-<li>minNeighbors: 每个窗口应该有多少个邻居，窗口中的区域被认为是一个脸。级联分类器将检测面部周围的多个窗口。此参数控制需要为要标记为面的窗口检测多少个矩形（邻居）。</li>
-<li>minSize: 宽度和高度（以像素为单位）的元组，用于指示窗口的最小尺寸。小于此大小的边界框将被忽略。一般操作是从（30,30）开始并从那里进行微调。</li>
-</ul>
-<p>&#160; &#160; &#160; &#160;通过调用在FaceDetector类的构造函数中创建的分类器的detectMultiScale方法，检测图像中的实际面</p>
-<h2 id="实例化算法"><a href="#实例化算法" class="headerlink" title="实例化算法"></a>实例化算法</h2><p>&#160; &#160; &#160; &#160;以上算法模型构建完成，接下只需要将模型实例化即可。代码段长这样：</p>
-<pre><code>fd = FaceDetector(args[&apos;face&apos;])
-faceRects = fd.detect(gray, scaleFactor=1.1, minNeighbors=5,
-    minSize=(30,30))
-print(&quot;I found {} face(s)&quot;.format(len(faceRects)))
 
-for (x, y, w, h) in faceRects:
-    cv2.rectangle(image, (x,y), (x+w, y+h), (0,255,0), 2)
+ap = argparse.ArgumentParser()
+ap.add_argument(&apos;-f&apos;, &apos;--face&apos;, required=True,
+    help= &apos;path to where the face cascade resides&apos;)
 
-cv2.imshow(&apos;face&apos;, image)
-</code></pre><p>&#160; &#160; &#160; &#160;这里说一下for循环是为了在图像周围实际绘制一个边界框。同样，每个边界框只是一个有四个值的元组：x和y的起始位置在图像，然后是脸部的宽度和高度。好了第一部分至此完成了，但是要说明的是对一些图像可能其中的脸并不能识别出来，或者有些框里并没有人脸，那么只需调整一下scaleFactor的值，因为他是最敏感的。当然如果无论怎么调参人脸都检测不出来，那我们不要在浪费时间了，放弃吧。。。。<br>下面是算法的结果。<br><img src="https://i.loli.net/2019/01/12/5c39ce030126f.png" alt="f1.png"></p>
-<p><img src="https://i.loli.net/2019/01/12/5c39cc7fc8223.png" alt="f2.png"></p>
+ap.add_argument(&apos;-e&apos;, &apos;--eye&apos;, required=True,
+    help=&apos;path to where the eye cacade resides&apos;)
+ap.add_argument(&apos;-v&apos;, &apos;--video&apos;,
+    help=&apos;path to the video file&apos;)
+args = vars(ap.parse_args())
+
+
+et = EyeTracker(args[&apos;face&apos;], args[&apos;eye&apos;])
+
+
+if not args.get(&apos;video&apos;, False):
+    camera = cv2.VideoCapture(0)
+
+else:
+    camera = cv2.VideoCapture(args[&apos;video&apos;])
+
+
+while True:
+    (grabbed, frame) = camera.read()
+
+    if args.get(&apos;video&apos;) and not grabbed:
+        break
+
+    frame = imutils.resize(frame, width=300)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    rects = et.track(gray)
+
+
+    for rect in rects:
+        cv2.rectangle(frame, (rect[0],rect[1]), (rect[2],rect[3]), (0,255,0), 2)
+
+
+
+    cv2.imshow(&apos;Tracking&apos;, frame)
+
+
+    k = cv2.waitKey(1) &amp; 0xFF
+    if k ==27:
+        break
+
+
+
+camera.release()
+cv2.destroyAllWindows()
+</code></pre><p>&#160; &#160; &#160; &#160;这里为了使人脸和眼睛检测更快，我们调整了图像的大小，使其宽度为300像素。算法执行结果如下：</p>
 
       
     </div>
@@ -419,7 +440,7 @@ cv2.imshow(&apos;face&apos;, image)
           
             <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
-            <a href="/tags/人脸检测/" rel="tag"><i class="fa fa-tag"></i> 人脸检测</a>
+            <a href="/tags/EyeTracker/" rel="tag"><i class="fa fa-tag"></i> EyeTracker</a>
           
         </div>
       
@@ -432,8 +453,8 @@ cv2.imshow(&apos;face&apos;, image)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/15/波士顿房价/" rel="next" title="波士顿房价">
-                <i class="fa fa-chevron-left"></i> 波士顿房价
+              <a href="/2019/01/12/facedetector-2/" rel="next" title="人脸检测（二）">
+                <i class="fa fa-chevron-left"></i> 人脸检测（二）
               </a>
             
           </div>
@@ -441,10 +462,6 @@ cv2.imshow(&apos;face&apos;, image)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/12/facedetector-2/" rel="prev" title="人脸检测（二）">
-                人脸检测（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -590,7 +607,7 @@ cv2.imshow(&apos;face&apos;, image)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入类库"><span class="nav-number">1.1.</span> <span class="nav-text">导入类库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传参"><span class="nav-number">1.2.</span> <span class="nav-text">传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立自定义类"><span class="nav-number">1.3.</span> <span class="nav-text">建立自定义类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化算法"><span class="nav-number">1.4.</span> <span class="nav-text">实例化算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立自定义类"><span class="nav-number">2.</span> <span class="nav-text">建立自定义类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例化算法"><span class="nav-number">3.</span> <span class="nav-text">实例化算法</span></a></li></ol></div>
             
 
           </div>
