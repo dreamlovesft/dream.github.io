@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/03/31/5ca008757f90a.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/03/31/5ca014cfd8e6f.jpg">
-<meta property="og:updated_time" content="2019-03-31T02:51:07.770Z">
+<meta property="og:updated_time" content="2019-03-31T03:06:46.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于人脸特征点的防瞌睡警报器">
 <meta name="twitter:description" content="前言本文介绍一种基于人脸特征点检测的防瞌睡警报器。">
@@ -454,9 +454,83 @@ def eye_aspect_ratio(eye):
     else:
         COUNTER=0
         alarm_on=False
-</code></pre><p>我们首先判断眼睛纵横比是否低于闭眼阈值（eye_ar_constant_frames），如果是，我们递增COUNTER，即该人闭眼的连续帧的总数。如果COUNTER超过eye_ar_constant_frames，那么我们认为这个人开始打瞌睡，接着查看警报是否打开，如果没有，我们将其打开。如果脚本执行时提供了–alarm路径，则处理播放警报声。我们特别注意创建一个单独的线程，负责调用sound_alarm，以确保在声音播放完毕之前我们的主程序不会暂停。接着，为了增强警报的可视性，我们在屏幕中增加文字提醒。如果眼睛纵横比大于eye_ar_thresh，表示眼睛是开着的。如果眼睛睁开，我们重置COUNTER并确保警报关闭。</p>
+</code></pre><p>我们首先判断眼睛纵横比是否低于闭眼阈值（eye_ar_constant_frames），如果是，我们递增COUNTER，即该人闭眼的连续帧的总数。<br>如果COUNTER超过eye_ar_constant_frames，那么我们认为这个人开始打瞌睡，接着查看警报是否打开，如果没有，我们将其打开。如果脚本执行时提供了–alarm路径，则处理播放警报声。我们特别注意创建一个单独的线程，负责调用sound_alarm，以确保在声音播放完毕之前我们的主程序不会暂停。接着，为了增强警报的可视性，我们在屏幕中增加文字提醒。如果眼睛纵横比大于eye_ar_thresh，表示眼睛是开着的。如果眼睛睁开，我们重置COUNTER并确保警报关闭。</p>
 <h2 id="警报的可视化窗口的实现"><a href="#警报的可视化窗口的实现" class="headerlink" title="警报的可视化窗口的实现"></a>警报的可视化窗口的实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">        # draw the computed eye aspect ratio on the frame to help</span><br><span class="line">        # with debugging and setting the correct eye aspect ratio</span><br><span class="line">        # thresholds and frame counters</span><br><span class="line">        cv2.putText(frame, &quot;EAR: &#123;:.2f&#125;&quot;.format(ear), (300, 30),</span><br><span class="line">            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)</span><br><span class="line"> </span><br><span class="line">    # show the frame</span><br><span class="line">    cv2.imshow(&quot;Frame&quot;, frame)</span><br><span class="line">    key = cv2.waitKey(1) &amp; 0xFF</span><br><span class="line"> </span><br><span class="line">    # if the `q` key was pressed, break from the loop</span><br><span class="line">    if key == ord(&quot;q&quot;):</span><br><span class="line">        break</span><br><span class="line"># do a bit of cleanup</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">vs.stop()</span><br></pre></td></tr></table></figure>
 <p>最后实现的效果如下视频。</p>
+<iframe height="498" width="510" src="https://youtu.be/AowjIqbWirM" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
