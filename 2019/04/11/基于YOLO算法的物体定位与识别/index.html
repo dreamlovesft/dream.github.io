@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,YOLO,Object Detection," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言本文基于YOLO算法实现对视频中物体的定位与识别。">
+<meta name="keywords" content="Python,YOLO,Object Detection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于YOLO算法的物体定位与识别">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/基于YOLO算法的物体定位与识别/index.html">
+<meta property="og:site_name" content="Dreamelover">
+<meta property="og:description" content="前言本文基于YOLO算法实现对视频中物体的定位与识别。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-11T12:24:52.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于YOLO算法的物体定位与识别">
+<meta name="twitter:description" content="前言本文基于YOLO算法实现对视频中物体的定位与识别。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/11/基于YOLO算法的物体定位与识别/"/>
+
+
+
+
+
+  <title>基于YOLO算法的物体定位与识别 | Dreamelover</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/dreamlovesft"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dreamelover</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Techblog & DailyThoughts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/基于YOLO算法的物体定位与识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dreamelover">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于YOLO算法的物体定位与识别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T20:06:39+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文基于YOLO算法实现对视频中物体的定位与识别。<br><a id="more"></a><br>在本文中我们将进行如下内容：</p>
+<ul>
+<li>讨论YOLO物体检测算法的模型和架构</li>
+<li>应用YOLO检测视频流中的对象</li>
+<li>讨论YOLO物体检测算法的一些缺点</li>
+</ul>
+<h1 id="YOLO物体检测算法"><a href="#YOLO物体检测算法" class="headerlink" title="YOLO物体检测算法"></a>YOLO物体检测算法</h1><p>在基于深度学习的物体检测算法领域中存在三种常用的算法模型</p>
+<ul>
+<li>R-CNN以及它的变生算法 包括original R-CNN, Fast R- CNN和Faster R-CNN</li>
+<li>Single Shot Detector (SSDs)</li>
+<li>YOLO</li>
+<li>先说一下R-CNN，它是一种典型的非端到端物体检测算法，即是一种two-stage检测算法。大体上就是说这种方法需要先在图像中提取可能含有目标的候选框（region proposal），然后将这些候选框输入到CNN模型，让CNN判断候选框中是否真的有目标，以及目标的类别是什么。这个过程，其实是有两部分组成，一是目标所在位置及大小，二是目标的类别。在整个算法中，目标位置和大小其实是包含在region proposal的过程里，而类别的判定则是在CNN中来判定的。由于输入CNN模型中并 不是我们的原始图像，而是经过处理后的可能包含物体的边界框（candidate bounding boxes），所以说它是非端到端检测算法。它的特点就是检测效果（体现在能识别物体的最小尺寸、物体的密集程度等）好，但是速度相当慢（特别是对于一般配置的笔记本，哭唧唧）。补充一下，经取证，现在 Faster R-CNN已经成为端到端检测算法（删掉了 Selective Search requirement ）</li>
+</ul>
+<p>再说一下YOLO（此YOLO可不是及时行乐，活在当下的意思哦），YOLO是端到端物体检测算法（也可理解为single-stage）的经典代表，现在已经更新到Version-3了。在前R-CNN中，CNN本质的作用还是用来分类，定位的功能其并没有做到。而YOLO这种方法就是只通过CNN网络，就能够实现目标的定位和识别。也就是原始图像输入到CNN网络中，直接输出图像中所有目标的位置和目标的类别，称之为端到端。</p>
+<p>YOLO算法的作者们基于ImageNet分类数据集和COCO检测数据集将该算法在对象检测和分类进行了联训（joint training），可以识别生活中较多的常见物体。如果感兴趣可以阅读一下<a href="https://arxiv.org/pdf/1804.02767.pdf" target="_blank" rel="noopener">YOLOv3教程</a>。</p>
+<h1 id="算法的实现"><a href="#算法的实现" class="headerlink" title="算法的实现"></a>算法的实现</h1><p>下面我们用python来实现一下YOLO算法</p>
+<h2 id="导入必要的包"><a href="#导入必要的包" class="headerlink" title="导入必要的包"></a>导入必要的包</h2><pre><code># import the necessary packages
+import numpy as np
+import argparse
+import imutils
+import time
+import cv2
+import os #控制系统进行某些操作
+</code></pre><h2 id="命令行参数的解析"><a href="#命令行参数的解析" class="headerlink" title="命令行参数的解析"></a>命令行参数的解析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># construct the argument parse and parse the arguments</span><br><span class="line">ap = argparse.ArgumentParser()   #宏定义</span><br><span class="line">ap.add_argument(&quot;-i&quot;, &quot;--input&quot;, #required=True,</span><br><span class="line">    help=&quot;path to input video&quot;)</span><br><span class="line">ap.add_argument(&quot;-o&quot;, &quot;--output&quot;, required=True,</span><br><span class="line">    help=&quot;path to output video&quot;)</span><br><span class="line">ap.add_argument(&quot;-y&quot;, &quot;--yolo&quot;, required=True,</span><br><span class="line">    help=&quot;base path to YOLO directory&quot;)</span><br><span class="line">ap.add_argument(&quot;-c&quot;, &quot;--confidence&quot;, type=float, default=0.5,</span><br><span class="line">    help=&quot;minimum probability to filter weak detections&quot;)   #置信分数</span><br><span class="line">ap.add_argument(&quot;-t&quot;, &quot;--threshold&quot;, type=float, default=0.3,</span><br><span class="line">    help=&quot;threshold when applyong non-maxima suppression&quot;)#总数是13x13的网格，</span><br><span class="line">                     每个网格预测5个BOX，所以最终有854个BOX，证据表明绝大                                   多数的BOX得分会很低，我们只要保留30%BOX即可</span><br><span class="line">args = vars(ap.parse_args())</span><br></pre></td></tr></table></figure>
+<ul>
+<li>–input：输入视频的路径</li>
+<li>–output：经检测算法处理完的保存路径</li>
+<li>–yolo：YOLO检测器的路径</li>
+<li>–confidence：置信分数阈值，置信分数低于此值的方框将被过滤掉</li>
+<li>–threshold：非最大值抑制阈值，参见<a href="https://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python/" target="_blank" rel="noopener">non-maxima suppression</a></li>
+</ul>
+<p>加载类库中物体的标签，并随机为它们配置颜色</p>
+<pre><code># load the COCO class labels our YOLO model was trained on
+labelsPath = os.path.sep.join([args[&quot;yolo&quot;], &quot;coco.names&quot;])
+LABELS = open(labelsPath).read().strip().split(&quot;\n&quot;)
+
+# initialize a list of colors to represent each possible class label
+np.random.seed(42)
+COLORS = np.random.randint(0, 255, size=(len(LABELS), 3),
+    dtype=&quot;uint8&quot;) 
+</code></pre><p>定义YOLO权重和配置文件的路径，然后从磁盘加载YOLO：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># derive the paths to the YOLO weights and model configuration</span><br><span class="line">weightsPath = os.path.sep.join([args[&quot;yolo&quot;], &quot;yolov3.weights&quot;])</span><br><span class="line">configPath = os.path.sep.join([args[&quot;yolo&quot;], &quot;yolov3.cfg&quot;])</span><br><span class="line"></span><br><span class="line"># load our YOLO object detector trained on COCO dataset (80 classes)</span><br><span class="line"># and determine only the *output* layer names that we need from YOLO</span><br><span class="line">print(&quot;[INFO] loading YOLO from disk...&quot;)</span><br><span class="line">net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)</span><br><span class="line">ln = net.getLayerNames()</span><br><span class="line">ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]</span><br></pre></td></tr></table></figure></p>
+<p> 导入视频及定义视频编写器和帧尺寸，尝试确定视频文件中的总帧数，以便我们估算整个视频的处理时间</p>
+<pre><code># initialize the video stream, pointer to output video file, and
+# frame dimensions
+if not args.get(&apos;input&apos;, False):
+    vs= cv2.VideoCapture(0)
+
+else:
+    vs = cv2.VideoCapture(args[&apos;input&apos;])
+# vs = cv2.VideoCapture(args[&quot;input&quot;])
+writer = None
+(W, H) = (None, None)
+
+# try to determine the total number of frames in the video file
+try:
+    prop = cv2.cv.CV_CAP_PROP_FRAME_COUNT if imutils.is_cv2() \
+        else cv2.CAP_PROP_FRAME_COUNT
+    total = int(vs.get(prop))
+    print(&quot;[INFO] {} total frames in video&quot;.format(total))
+
+# an error occurred while trying to determine the total
+# number of frames in the video file
+except:
+    print(&quot;[INFO] could not determine # of frames in video&quot;)
+    print(&quot;[INFO] no approx. completion time can be provided&quot;)
+    total = -1
+</code></pre><p>开始逐个处理帧，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># loop over frames from the video file stream</span><br><span class="line">while True:</span><br><span class="line">    # read the next frame from the file</span><br><span class="line">    (grabbed, frame) = vs.read()</span><br><span class="line"></span><br><span class="line">    # if the frame was not grabbed, then we have reached the end</span><br><span class="line">    # of the stream</span><br><span class="line">    if not grabbed:</span><br><span class="line">        break</span><br><span class="line"></span><br><span class="line">    # if the frame dimensions are empty, grab them</span><br><span class="line">    if W is None or H is None:</span><br><span class="line">        (H, W) = frame.shape[:2]</span><br></pre></td></tr></table></figure></p>
+<p>让我们使用当前帧作为输入执行YOLO的前向传递。在这里，我们构建一个blob并将其传递通过网络，从而获得预测。我已经用时间戳包围了前向传递操作，因此我们可以计算在一帧上进行预测所用的时间 - 这将有助于我们估计处理整个视频所需的时间。然后我们将继续初始化我们将会使用的三个列表：box，confidences和classIDs</p>
+<pre><code># construct a blob from the input frame and then perform a forward
+# pass of the YOLO object detector, giving us our bounding boxes
+# and associated probabilities
+blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (416, 416),
+    swapRB=True, crop=False)
+net.setInput(blob)
+start = time.time()
+layerOutputs = net.forward(ln)
+end = time.time()
+
+# initialize our lists of detected bounding boxes, confidences,
+# and class IDs, respectively
+boxes = []
+confidences = []
+ classIDs = []
+</code></pre><p>接着，我们循环输出图和检测结果（labels）,提取classID并过滤掉弱预测（是否存在物体），然后，计算边界框坐标并不断更新我们各列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># loop over each of the layer outputs</span><br><span class="line">for output in layerOutputs:</span><br><span class="line">    # loop over each of the detections</span><br><span class="line">    for detection in output:</span><br><span class="line">        # extract the class ID and confidence (i.e., probability)</span><br><span class="line">        # of the current object detection</span><br><span class="line">        scores = detection[5:]</span><br><span class="line">        classID = np.argmax(scores)</span><br><span class="line">        confidence = scores[classID]</span><br><span class="line"></span><br><span class="line">        # filter out weak predictions by ensuring the detected</span><br><span class="line">        # probability is greater than the minimum probability</span><br><span class="line">        if confidence &gt; args[&quot;confidence&quot;]:</span><br><span class="line">            # scale the bounding box coordinates back relative to</span><br><span class="line">            # the size of the image, keeping in mind that YOLO</span><br><span class="line">            # actually returns the center (x, y)-coordinates of</span><br><span class="line">            # the bounding box followed by the boxes&apos; width and</span><br><span class="line">            # height</span><br><span class="line">            box = detection[0:4] * np.array([W, H, W, H])</span><br><span class="line">            (centerX, centerY, width, height) = box.astype(&quot;int&quot;)</span><br><span class="line"></span><br><span class="line">            # use the center (x, y)-coordinates to derive the top</span><br><span class="line">            # and and left corner of the bounding box</span><br><span class="line">            x = int(centerX - (width / 2))</span><br><span class="line">            y = int(centerY - (height / 2))</span><br><span class="line"></span><br><span class="line">            # update our list of bounding box coordinates,</span><br><span class="line">            # confidences, and class IDs</span><br><span class="line">            boxes.append([x, y, int(width), int(height)])</span><br><span class="line">            confidences.append(float(confidence))</span><br><span class="line">            classIDs.append(classID)</span><br></pre></td></tr></table></figure></p>
+<p>进一步，我们调用cv2.dnn.NMSBoxes函数以抑制弱的重叠边界框，循环遍历由NMS计算的idx并绘制相应的边界框+标签</p>
+<pre><code># apply non-maxima suppression to suppress weak, overlapping
+# bounding boxes
+idxs = cv2.dnn.NMSBoxes(boxes, confidences, args[&quot;confidence&quot;],
+    args[&quot;threshold&quot;])
+
+# ensure at least one detection exists
+if len(idxs) &gt; 0:
+    # loop over the indexes we are keeping
+    for i in idxs.flatten():
+        # extract the bounding box coordinates
+        (x, y) = (boxes[i][0], boxes[i][1])
+        (w, h) = (boxes[i][2], boxes[i][3])
+
+        # draw a bounding box rectangle and label on the frame
+        color = [int(c) for c in COLORS[classIDs[i]]]
+        cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
+        text = &quot;{}: {:.4f}&quot;.format(LABELS[classIDs[i]],
+            confidences[i])
+        cv2.putText(frame, text, (x, y - 5),
+        cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+</code></pre><p> 接着，初始化视频编写器，print出我们对处理视频所需时间的估算,将处理后得到的将帧写入输出视频文件。最后，清理和释放指针和窗口。如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  # check if the video writer is None</span><br><span class="line">  if writer is None:</span><br><span class="line">      # initialize our video writer</span><br><span class="line">      fourcc = cv2.VideoWriter_fourcc(*&quot;MJPG&quot;)</span><br><span class="line">      writer = cv2.VideoWriter(args[&quot;output&quot;], fourcc, 5,</span><br><span class="line">          (frame.shape[1], frame.shape[0]), True)</span><br><span class="line"></span><br><span class="line">      # some information on processing single frame</span><br><span class="line">      if total &gt; 0:</span><br><span class="line">          elap = (end - start)</span><br><span class="line">          print(&quot;[INFO] single frame took &#123;:.4f&#125; seconds&quot;.format(elap))</span><br><span class="line">          print(&quot;[INFO] estimated total time to finish: &#123;:.4f&#125;&quot;.format(</span><br><span class="line">              elap * total))</span><br><span class="line"></span><br><span class="line">  # write the output frame to disk</span><br><span class="line">  writer.write(frame)</span><br><span class="line"></span><br><span class="line">  cv2.imshow(&quot;Frame&quot;, frame)</span><br><span class="line">  key = cv2.waitKey(1) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">  if key == ord(&quot;q&quot;):</span><br><span class="line">      break</span><br><span class="line"></span><br><span class="line"># release the file pointers</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">print(&quot;[INFO] cleaning up...&quot;)</span><br><span class="line">writer.release()</span><br><span class="line">vs.release()</span><br></pre></td></tr></table></figure></p>
+<h1 id="YOLO算法的缺点"><a href="#YOLO算法的缺点" class="headerlink" title="YOLO算法的缺点"></a>YOLO算法的缺点</h1><p>1、对于体型较小的物体处理效果不好<br>2、不擅长处理相互距离很近的对象</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JsNjjNwvv9g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+        <div>
+    
+            <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+       
+</div>
+
+
+  
+  </div>
+  
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/YOLO/" rel="tag"><i class="fa fa-tag"></i> YOLO</a>
+          
+            <a href="/tags/Object-Detection/" rel="tag"><i class="fa fa-tag"></i> Object Detection</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/31/detect-drowsiness/" rel="next" title="基于人脸特征点的防瞌睡警报器">
+                <i class="fa fa-chevron-left"></i> 基于人脸特征点的防瞌睡警报器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YOLO物体检测算法"><span class="nav-number">2.</span> <span class="nav-text">YOLO物体检测算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法的实现"><span class="nav-number">3.</span> <span class="nav-text">算法的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入必要的包"><span class="nav-number">3.1.</span> <span class="nav-text">导入必要的包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行参数的解析"><span class="nav-number">3.2.</span> <span class="nav-text">命令行参数的解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YOLO算法的缺点"><span class="nav-number">4.</span> <span class="nav-text">YOLO算法的缺点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+
+    <div id="music163player">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=444745161&auto=1&height=66">
+        </iframe>
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":120,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
